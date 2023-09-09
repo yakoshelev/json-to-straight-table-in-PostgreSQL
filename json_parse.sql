@@ -98,8 +98,8 @@ declare
 	--	Set of variables to prepare dynemic request to assemple final return json array of records inside of json objects.
 	v_tbl_rec 			record;																									
 	v_counter  			integer := 	0;
-	v_request			text	:= 	'create temp table tmp_tbl_with_data_from_json as ' || 
-									'select distinct * from ' 							|| 
+	v_request			text	:= 	'create temp table tmp_tbl_with_data_from_json as ' 	|| 
+									'select distinct * from ' 		|| 
 									chr(10);
 	v_request_order_by	text	:= 	' order by ';
 	---
@@ -120,10 +120,10 @@ with
 recursive
 cte_kv as (
 	select 
-		"key"					as "key",
-		"value"					as "value",
+		"key"			as "key",
+		"value"			as "value",
 		jsonb_typeof("value") 	as "value_type",
-		1						as "iteration_num"
+		1			as "iteration_num"
 	from 
 		jsonb_each(v_jsonb)
 	---	
@@ -139,9 +139,9 @@ cte_kv as (
 		),
 		cte_iter_11 as (
 			select 
-				cte_iter_1."key"							as "key",
+				cte_iter_1."key"				as "key",
 				jsonb_array_elements(cte_iter_1."value") 	as "value",
-				"iteration_num" + 1							as "iteration_num"
+				"iteration_num" + 1				as "iteration_num"
 			from 
 				cte_iter_1	
 			where 
@@ -151,7 +151,7 @@ cte_kv as (
 			select
 				(jsonb_each(cte_iter_1."value"))."key"		as "key", 
 				(jsonb_each(cte_iter_1."value"))."value"	as "value",
-				"iteration_num" + 1							as "iteration_num"				
+				"iteration_num" + 1				as "iteration_num"				
 			from 
 				cte_iter_1	
 			where 
@@ -163,10 +163,10 @@ cte_kv as (
 			select cte_iter_12.* from cte_iter_12
 		)
 			select 
-				cte_iter_2."key"							as "key",
-				cte_iter_2."value"							as "value",
-				jsonb_typeof(cte_iter_2."value") 			as "value_type",
-				"iteration_num"								as "iteration_num"
+				cte_iter_2."key"				as "key",
+				cte_iter_2."value"				as "value",
+				jsonb_typeof(cte_iter_2."value") 		as "value_type",
+				"iteration_num"					as "iteration_num"
 			from 
 				cte_iter_2 
 		) 
@@ -174,7 +174,9 @@ cte_kv as (
 )
 --	
 ,cte11 as (
-	select "key","value","value_type", "iteration_num" as "rank_num", row_number() OVER () as row_num from ( 	select * 	from cte_kv where "value_type" not in ('array') 			order by "key", "value"	) 	tbl		--	
+	select "key","value","value_type", "iteration_num" as "rank_num", row_number() OVER () as row_num 
+	from ( select * from cte_kv where "value_type" not in ('array') 			
+	order by "key", "value"	) 	tbl		--	
 )
 select * from cte11
 ;
