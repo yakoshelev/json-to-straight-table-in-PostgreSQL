@@ -63,7 +63,7 @@ Request:
 	select * from tmp_tbl_with_data_from_json;
 returns table:
 ---
-k1	k2	k3				k31
+k1	k2	k3		k31
 1	2	{"k31": "v1"}	v1
 1	3	{"k31": "v1"}	v1
 
@@ -86,7 +86,7 @@ from
 ;
 which returns the table:
 ---
-k1 	k2 	k3 				k31
+k1 	k2 	k3 		k31
 1 	2 	{"k31": "v1"} 	v1
 1 	3 	{"k31": "v1"} 	v1
 *
