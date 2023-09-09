@@ -52,12 +52,12 @@ Request:
 	select distinct * from tmp_tbl_data_with_json_analysis order by "iteration_num", "key", "value";
 returns table:
 ---
-"key" 	"value" 		"value_type" 	"rank_num" "row_num"
-k1 		1 				number 			1 				1
-k3 		{"k31": "v1"} 	object 			1 				4
-k2 		2 				number 			2 				2
-k2 		3 				number 			2 				3
-k31 	"v1" 			string 			2 				5
+"key" 	"value" 		"value_type" 	"rank_num" 	"row_num"
+k1 	1 			number 		1 		1
+k3 	{"k31": "v1"} 	object 			1 		4
+k2 	2 			number 		2 		2
+k2 	3 			number 		2 		3
+k31 	"v1" 			string 		2 		5
 
 Request:
 	select * from tmp_tbl_with_data_from_json;
