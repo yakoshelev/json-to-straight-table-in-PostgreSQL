@@ -5,7 +5,7 @@ Unified method to parse JSON object into table
 To parse a JSON object of any structure and obtain a set of regular table records, just run a query using the sample as template:
 
 select distinct	
-	*
+ *
 from
 	--	standard PG function
 	json_to_recordset (
