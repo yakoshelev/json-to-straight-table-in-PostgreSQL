@@ -54,7 +54,7 @@ returns table:
 ---
 "key" 	"value" 		"value_type" 	"rank_num" 	"row_num"
 k1 	1 			number 		1 		1
-k3 	{"k31": "v1"} 	object 			1 		4
+k3 	{"k31": "v1"} 		object 		1 		4
 k2 	2 			number 		2 		2
 k2 	3 			number 		2 		3
 k31 	"v1" 			string 		2 		5
